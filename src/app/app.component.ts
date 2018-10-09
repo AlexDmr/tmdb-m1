@@ -5,6 +5,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {auth, User} from 'firebase';
 import {Observable} from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   private dbData: Observable<any>;
 
   constructor(private tmdb: TmdbService, public anAuth: AngularFireAuth, private db: AngularFireDatabase) {
-    this.anAuth.user.subscribe( u => {
+    this.anAuth.user.pipe(filter( u => !!u )).subscribe( u => {
       this._user = u;
       const listsPath = `lists/${u.uid}`;
       const lists = db.list(listsPath);
@@ -25,7 +26,7 @@ export class AppComponent {
       this.dbData = lists.valueChanges();
     });
     setTimeout( () =>
-      tmdb.init('5edf1ac8b8191a5500e58377be913632')
+      tmdb.init('XXX') // Clef de TMDB
           .getMovie(13)
           .then( (m: MovieResponse) => console.log('Movie 13:', this._movie = m) )
           .catch( err => console.error('Error getting movie:', err) ),
@@ -47,6 +48,7 @@ export class AppComponent {
 
   logout() {
     this.anAuth.auth.signOut();
+    this._user = undefined;
   }
 
   get user(): User {

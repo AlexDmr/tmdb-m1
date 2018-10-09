@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase:  {
-    apiKey: 'AIzaSyCUBdyJ6fQYqZrv3IgieQnKydULooqSZEs',
-    authDomain: 'tmdb-m1.firebaseapp.com',
-    databaseURL: 'https://tmdb-m1.firebaseio.com',
-    projectId: 'tmdb-m1',
-    storageBucket: 'tmdb-m1.appspot.com',
-    messagingSenderId: '487760616893'
+    apiKey: "XXX",
+    authDomain: "XXX",
+    databaseURL: "XXX",
+    projectId: "XXX",
+    storageBucket: "XXX",
+    messagingSenderId: "XXX"
   }
 };
 
